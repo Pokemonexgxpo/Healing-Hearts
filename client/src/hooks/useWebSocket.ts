@@ -31,7 +31,10 @@ export default function useWebSocket(initialMessages: Message[] = []) {
             return;
           }
           
-          const message: Message = data;
+          const message: Message = {
+            ...data,
+            timestamp: data.timestamp ? new Date(data.timestamp) : new Date()
+          };
           setMessages(prev => {
             // Avoid duplicates
             const exists = prev.some(msg => 

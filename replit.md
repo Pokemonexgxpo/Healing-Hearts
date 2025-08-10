@@ -2,9 +2,17 @@
 
 ## Overview
 
-MindSpace is a comprehensive mental health support web application that provides a safe, interactive space for users seeking mental health resources and peer connection. The platform features an FAQ system with expandable cards for common mental health questions, an interactive coping strategy wheel, inspirational quotes management, real-time peer chat functionality, and crisis resource information.
+MindSpace is a comprehensive mental health support web application that provides a safe, interactive space for users seeking mental health resources and peer connection. The platform features an FAQ system with expandable cards for common mental health questions, an interactive coping strategy wheel with SVG-based visualization, inspirational quotes management, real-time peer chat functionality, and crisis resource information.
 
 The application is designed to be accessible, supportive, and community-driven, helping users find immediate coping strategies, connect with others facing similar challenges, and access professional mental health resources when needed.
+
+## Recent Changes (January 2025)
+
+- **Fixed infinite re-render loop** in ChatRoom component by optimizing WebSocket hook dependencies
+- **Improved coping wheel functionality** with proper SVG-based segments and accurate selection algorithm
+- **Enhanced wheel design** with colorful segments, clear text visibility, and prominent red pointer
+- **Fixed timestamp handling** in chat messages to prevent runtime errors
+- **Optimized WebSocket reconnection** logic for better chat stability
 
 ## User Preferences
 

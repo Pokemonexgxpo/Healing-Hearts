@@ -2,12 +2,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import type { Message, InsertMessage } from "@shared/schema";
 
 export default function useWebSocket(initialMessages: Message[] = []) {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const ws = useRef<WebSocket | null>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const reconnectAttemptsRef = useRef(0);
   const maxReconnectAttempts = 5;
+  const hasInitialized = useRef(false);
 
   const connect = useCallback(() => {
     try {
@@ -87,10 +88,11 @@ export default function useWebSocket(initialMessages: Message[] = []) {
   }, []);
 
   useEffect(() => {
-    if (initialMessages.length > 0) {
+    if (initialMessages.length > 0 && !hasInitialized.current) {
       setMessages(initialMessages);
+      hasInitialized.current = true;
     }
-  }, []);
+  }, [initialMessages]);
 
   const sendMessage = useCallback((messageData: InsertMessage) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {

@@ -28,13 +28,15 @@ export default function CopingWheel() {
 
     const spins = 3 + Math.random() * 3;
     const finalAngle = Math.random() * 360;
-    const totalRotation = spins * 360 + finalAngle;
+    const totalRotation = rotation + spins * 360 + finalAngle;
     
     setRotation(totalRotation);
 
+    // Calculate which segment the pointer lands on
     const segmentAngle = 360 / copingStrategies.length;
-    const normalizedAngle = (360 - (finalAngle % 360)) % 360;
-    const selectedIndex = Math.floor(normalizedAngle / segmentAngle);
+    // Normalize to 0-360 and account for the pointer being at the top
+    const normalizedAngle = (360 - (finalAngle % 360) + 90) % 360;
+    const selectedIndex = Math.floor(normalizedAngle / segmentAngle) % copingStrategies.length;
     const strategy = copingStrategies[selectedIndex];
 
     setTimeout(() => {
@@ -54,32 +56,82 @@ export default function CopingWheel() {
         <div className="flex flex-col items-center space-y-8">
           <div className="relative">
             <div 
-              className="w-80 h-80 rounded-full border-8 border-white shadow-2xl relative overflow-hidden bg-gradient-to-br from-primary to-secondary transform transition-transform duration-[3000ms] ease-out"
-              style={{ transform: `rotate(${rotation}deg)` }}
+              className="w-80 h-80 rounded-full border-8 border-white shadow-2xl relative overflow-hidden bg-white transform transition-transform ease-out"
+              style={{ 
+                transform: `rotate(${rotation}deg)`,
+                transitionDuration: isSpinning ? '3000ms' : '0ms'
+              }}
               data-testid="wheel-container"
             >
-              {copingStrategies.map((strategy, index) => {
-                const segmentAngle = 360 / copingStrategies.length;
-                const hue = (index * 30) % 360;
-                return (
-                  <div
-                    key={strategy}
-                    className="absolute inset-0 flex items-center justify-center text-white text-xs font-medium p-2 text-center"
-                    style={{
-                      transform: `rotate(${index * segmentAngle}deg)`,
-                      clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.cos((segmentAngle * Math.PI) / 180)}% ${50 - 50 * Math.sin((segmentAngle * Math.PI) / 180)}%)`,
-                      backgroundColor: `hsl(${hue}, 70%, 60%)`
-                    }}
-                  >
-                    <span style={{ transform: `rotate(${-index * segmentAngle}deg)` }}>
-                      {strategy}
-                    </span>
-                  </div>
-                );
-              })}
+              <svg className="w-full h-full" viewBox="0 0 320 320">
+                {copingStrategies.map((strategy, index) => {
+                  const segmentAngle = 360 / copingStrategies.length;
+                  const startAngle = index * segmentAngle - 90; // Start from top
+                  const endAngle = (index + 1) * segmentAngle - 90;
+                  
+                  const hue = (index * 25) % 360;
+                  const color = `hsl(${hue}, 70%, 55%)`;
+                  
+                  // Convert angles to radians
+                  const startRad = (startAngle * Math.PI) / 180;
+                  const endRad = (endAngle * Math.PI) / 180;
+                  
+                  // Calculate path for the segment
+                  const cx = 160;
+                  const cy = 160;
+                  const radius = 140;
+                  
+                  const x1 = cx + radius * Math.cos(startRad);
+                  const y1 = cy + radius * Math.sin(startRad);
+                  const x2 = cx + radius * Math.cos(endRad);
+                  const y2 = cy + radius * Math.sin(endRad);
+                  
+                  const largeArcFlag = segmentAngle > 180 ? 1 : 0;
+                  
+                  const pathData = [
+                    `M ${cx} ${cy}`,
+                    `L ${x1} ${y1}`,
+                    `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+                    'Z'
+                  ].join(' ');
+                  
+                  // Text position (middle of segment)
+                  const textAngle = startAngle + segmentAngle / 2;
+                  const textRad = (textAngle * Math.PI) / 180;
+                  const textRadius = radius * 0.65;
+                  const textX = cx + textRadius * Math.cos(textRad);
+                  const textY = cy + textRadius * Math.sin(textRad);
+                  
+                  return (
+                    <g key={strategy}>
+                      <path
+                        d={pathData}
+                        fill={color}
+                        stroke="white"
+                        strokeWidth="2"
+                      />
+                      <text
+                        x={textX}
+                        y={textY}
+                        fill="white"
+                        fontSize="10"
+                        fontWeight="600"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        transform={`rotate(${textAngle + 90}, ${textX}, ${textY})`}
+                      >
+                        <tspan x={textX} dy="-5">{strategy.split(' ').slice(0, 2).join(' ')}</tspan>
+                        {strategy.split(' ').length > 2 && (
+                          <tspan x={textX} dy="12">{strategy.split(' ').slice(2).join(' ')}</tspan>
+                        )}
+                      </text>
+                    </g>
+                  );
+                })}
+              </svg>
             </div>
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 z-10">
-              <div className="w-0 h-0 border-l-4 border-r-4 border-b-8 border-l-transparent border-r-transparent border-b-accent"></div>
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-3 z-10">
+              <div className="w-0 h-0 border-l-6 border-r-6 border-b-12 border-l-transparent border-r-transparent border-b-red-500 drop-shadow-lg"></div>
             </div>
           </div>
           

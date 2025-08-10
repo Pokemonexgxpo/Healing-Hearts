@@ -114,15 +114,19 @@ export default function CopingWheel() {
                         x={textX}
                         y={textY}
                         fill="white"
-                        fontSize="10"
+                        fontSize="8"
                         fontWeight="600"
                         textAnchor="middle"
                         dominantBaseline="middle"
                         transform={`rotate(${textAngle + 90}, ${textX}, ${textY})`}
                       >
-                        <tspan x={textX} dy="-5">{strategy.split(' ').slice(0, 2).join(' ')}</tspan>
-                        {strategy.split(' ').length > 2 && (
-                          <tspan x={textX} dy="12">{strategy.split(' ').slice(2).join(' ')}</tspan>
+                        {strategy.length > 15 ? (
+                          <>
+                            <tspan x={textX} dy="-6">{strategy.split(' ').slice(0, 2).join(' ')}</tspan>
+                            <tspan x={textX} dy="10">{strategy.split(' ').slice(2).join(' ')}</tspan>
+                          </>
+                        ) : (
+                          <tspan x={textX}>{strategy}</tspan>
                         )}
                       </text>
                     </g>

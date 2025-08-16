@@ -18,9 +18,9 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">M</span>
+              <span className="text-white font-bold text-sm">H</span>
             </div>
-            <span className="text-xl font-semibold text-gray-900">MindSpace</span>
+            <span className="text-xl font-semibold text-gray-900">Healing Hearts</span>
           </div>
           
           <div className="hidden md:block">

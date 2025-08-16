@@ -1,8 +1,8 @@
-# MindSpace - Mental Health Support Platform
+# Healing Hearts - Mental Health Support Platform
 
 ## Overview
 
-MindSpace is a comprehensive mental health support web application that provides a safe, interactive space for users seeking mental health resources and peer connection. The platform features an FAQ system with expandable cards for common mental health questions, an interactive coping strategy wheel with SVG-based visualization, inspirational quotes management, real-time peer chat functionality, and crisis resource information.
+Healing Hearts is a comprehensive mental health support web application that provides a safe, interactive space for users seeking mental health resources and peer connection. The platform features an FAQ system with expandable cards for common mental health questions, an interactive coping strategy wheel with SVG-based visualization, inspirational quotes management, real-time peer chat functionality, and crisis resource information.
 
 The application is designed to be accessible, supportive, and community-driven, helping users find immediate coping strategies, connect with others facing similar challenges, and access professional mental health resources when needed.
 

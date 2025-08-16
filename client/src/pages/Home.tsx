@@ -163,34 +163,37 @@ const questions = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-neutral font-inter text-gray-800">
+    <div className="min-h-screen bg-hearts-pattern font-inter text-gray-800">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/5 to-secondary/5 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            You're Not Alone
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-            A safe space for mental health support, coping strategies, and community connection. 
-            Get the help and encouragement you deserve.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="#questions" 
-              className="bg-primary text-white px-8 py-3 rounded-xl font-medium hover:bg-primary/90 transition duration-200 shadow-lg"
-              data-testid="link-support"
-            >
-              Get Support Now
-            </a>
-            <a 
-              href="#resources" 
-              className="bg-red-500 text-white px-8 py-3 rounded-xl font-medium hover:bg-red-600 transition duration-200 shadow-lg"
-              data-testid="link-crisis"
-            >
-              Crisis Resources
-            </a>
+      <section className="bg-gradient-to-br from-pink-100/60 via-purple-50/40 to-blue-100/60 py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-healing-gradient"></div>
+        <div className="relative z-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              You're Not Alone
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              A safe space for mental health support, coping strategies, and community connection. 
+              Get the help and encouragement you deserve.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="#questions" 
+                className="bg-primary text-white px-8 py-3 rounded-xl font-medium hover:bg-primary/90 transition duration-200 shadow-lg"
+                data-testid="link-support"
+              >
+                Get Support Now
+              </a>
+              <a 
+                href="#resources" 
+                className="bg-red-500 text-white px-8 py-3 rounded-xl font-medium hover:bg-red-600 transition duration-200 shadow-lg"
+                data-testid="link-crisis"
+              >
+                Crisis Resources
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -223,9 +226,9 @@ export default function Home() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">M</span>
+                  <span className="text-white font-bold text-sm">H</span>
                 </div>
-                <span className="text-xl font-semibold">MindSpace</span>
+                <span className="text-xl font-semibold">Healing Hearts</span>
               </div>
               <p className="text-gray-300 mb-4">A safe space for mental health support and community connection.</p>
               <div className="space-y-2">
